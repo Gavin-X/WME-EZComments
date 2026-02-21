@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME EZ Comments
 // @namespace    http://tampermonkey.net/
-// @version      2.1.3
+// @version      2.1.5
 // @description  Customizable quick comments for Waze Map Editor with placeholder support
 // @author       https://github.com/michaelrosstarr
 // @match        https://www.waze.com/*/editor*
@@ -16,7 +16,7 @@
     'use strict';
 
     const SCRIPT_NAME = 'WME EZ Comments';
-    const SCRIPT_VERSION = '2.1.4';
+    const SCRIPT_VERSION = '2.1.5';
     const SCRIPT_ID = 'wme-ez-comments-bushmanza-edition';
     const STORAGE_KEY = 'wme_ez_comments_templates';
     const CUSTOM_USERNAME_KEY = 'wme_ez_comments_custom_username';
@@ -24,7 +24,6 @@
     let sdk = null;
     let modalOpen = false;
     let currentIssueId = null;
-
     // Default comment templates with placeholders
     const DEFAULT_TEMPLATES = {
         initial: `Hi, Waze volunteers responding to your "{TYPE}" issue that you reported on {FULLDATE}.
@@ -129,8 +128,6 @@ If we don't hear from you soon, we will assume that this is no longer an issue a
 
     // Replace placeholders in template
     function replacePlaceholders(template, type, dateStr) {
-
-
 
         let result = template;
 
@@ -404,7 +401,7 @@ If we don't hear from you soon, we will assume that this is no longer an issue a
         const { tabLabel, tabPane } = await sdk.Sidebar.registerScriptTab();
 
         // Set the tab label
-        tabLabel.innerText = SCRIPT_NAME;
+        tabLabel.innerText = 'EZ Comments';
         tabLabel.title = 'Customize quick comment templates';
 
         // Create the content
@@ -412,9 +409,11 @@ If we don't hear from you soon, we will assume that this is no longer an issue a
         tabContent.id = 'ezc-settings';
         tabContent.innerHTML = `
             <div style="padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;">
-                <h3 style="margin-top: 0;">${SCRIPT_NAME} v${SCRIPT_VERSION}</h3>
+                <h3 style="margin-top: 0;">${SCRIPT_NAME} </h3>
+                <p style="color: #666; margin-bottom: 5px;">Version: ${SCRIPT_VERSION}</p>
+                <p style="color: #666; margin-bottom: 20px; font-size: 12px;">By BushmanZA</p>
                 <p style="color: #666; margin-bottom: 20px;">Customize your quick comment templates. Use placeholders to make templates dynamic.</p>
-                
+
                 <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                     <h4 style="margin-top: 0;">Available Placeholders:</h4>
                     <div style="display: grid; grid-template-columns: 150px 1fr; gap: 10px; font-size: 12px;">
