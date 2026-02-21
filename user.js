@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME EZ Comments
 // @namespace    http://tampermonkey.net/
-// @version      2.1.5
+// @version      2.1.6
 // @description  Customizable quick comments for Waze Map Editor with placeholder support
 // @author       https://github.com/michaelrosstarr
 // @match        https://www.waze.com/*/editor*
@@ -16,7 +16,7 @@
     'use strict';
 
     const SCRIPT_NAME = 'WME EZ Comments';
-    const SCRIPT_VERSION = '2.1.5';
+    const SCRIPT_VERSION = '2.1.6';
     const SCRIPT_ID = 'wme-ez-comments-bushmanza-edition';
     const STORAGE_KEY = 'wme_ez_comments_templates';
     const CUSTOM_USERNAME_KEY = 'wme_ez_comments_custom_username';
@@ -24,32 +24,25 @@
     let sdk = null;
     let modalOpen = false;
     let currentIssueId = null;
+
     // Default comment templates with placeholders
     const DEFAULT_TEMPLATES = {
-        initial: `Hi, Waze volunteers responding to your "{TYPE}" issue that you reported on {FULLDATE}.
+        initial: `Hi there! I’m a volunteer map editor responding to your "{TYPE}" issue that you reported on {FULLDATE}.
 
 Can you please give us some additional information? Waze gives us very little to work off of so it would be greatly appreciated if you could help us out.
 
-Please reply using the Waze app and not emails, the report system does not work with replying to the email.
+~ {USERNAME}`,
+        followUp: `Hi again!, we haven't heard back from you about the "{TYPE}" issue you reported on {FULLDATE}.
 
-~ {USERNAME}
+Any details you can share will help us get the map fixed for everyone.
 
-*Open to any editor*`,
-        followUp: `Hi, we haven't heard back from you about the "{TYPE}" issue you reported on {FULLDATE}.
+~ {USERNAME}`,
+        final: `Hi again! Just following up to see if you had a chance to see the previous message. We still need a bit more info to fix this.
 
-Please help us to make Waze better for all users. Please respond using the Waze app, emails don't work with the reporting system.
+If we don't hear back in a few days, we'll have to close this report, but you can always report it again next time you're in the area.
 
-~ {USERNAME}
-
-*Open to any editor*`,
-        final: `Hi, we haven't heard back from you about your "{TYPE}" issue that you reported on {FULLDATE}.
-
-If we don't hear from you soon, we will assume that this is no longer an issue and close the report. Please reply using the Waze app and not emails, the report system does not work with replying to the email.
-
-~ {USERNAME}
-
-*Open to any editor*`,
-        close: `Hi, since we haven't heard back from you, we are going to close this issue. If you come across any other issues, please feel free to report it again via the Waze app.
+~ {USERNAME}`,
+        close: `Closing this report as 'Not Identified' for now since We haven't received enough information to identify the map error. If you encounter this again, please feel free to report it with a quick description of the problem!
 
 ~ {USERNAME}`,
         resolved: `Thanks for the info! I’ve updated the map to reflect the correct turn/road/address. The change should be live in the app after the next map update (usually 1-2 days). Happy Wazing!
