@@ -4,6 +4,12 @@ on:
   pull_request:
     types: [ opened ]
 
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Set Release Version'
+        required: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,3 +21,13 @@ jobs:
         uses: saadmk11/changelog-ci@v1.2.0
         with:
             config_file: changelog-ci-config.yaml
+            release_version: ${{ github.event.inputs.release_version }}
+
+      - name: changelog-ci
+        uses: saadmk11/changelog-ci@v1.2.0
+        id: changelog-ci
+      
+      - name: Get Changelog Output
+        run: |
+          echo "${{ steps.changelog-ci.outputs.changelog }}"
+          echo "${{ steps.changelog-ci.outputs.changelog }}" >> $GITHUB_STEP_SUMMARY
