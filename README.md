@@ -1,107 +1,49 @@
+<p>
+<img alt="version-badge" src="https://img.shields.io/badge/version-2.2.0-blue">
+<img alt="GitHub License" src="https://img.shields.io/github/license/michaelrosstarr/WME-EZComments">
+<img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/michaelrosstarr/WME-EZComments/main">
+<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/michaelrosstarr/WME-EZComments">
+<img alt="GitHub repo" src="https://img.shields.io/badge/github-repo-blue?logo=github">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/michaelrosstarr/WME-EZComments">
+</p>
+
 # WME EZ Comments
 
-Quick comment templates for Waze Map Editor with automatic placeholders.
+**WME EZ Comments** is a lightweight userscript for the **Waze Map Editor (WME)** designed to help volunteer editors communicate with drivers more efficiently.
+
+Instead of typing the same "Where was the missing turn?" or "Is this road open?" messages over and over, **WME EZ Comments** allows you to drop pre-formatted, professional responses into Update Requests (URs) with a single click.
 
 **Built with the official [Waze Map Editor JavaScript SDK](https://www.waze.com/editor/sdk/)**
 
-## Features
+## Why use WME EZ Comments?
 
-- 4 customizable comment templates
-- Auto-fill placeholders (date, issue type, username)
-- Settings saved automatically
-- One-click comment buttons
-- Custom username option
+* **Save Time**: No more repetitive typing or copy-pasting from a Notepad file.
+* **Consistency**: Keep your communication professional and aligned with community standards.
+* **Human Touch**: Pre-load templates that sound like a real person, not a support bot.
+* **Focus on Editing**: Spend less time writing and more time fixing the map.
+
+## Key Features
+* **One-Click Responses**: Quickly reply to common reports like General Error, Incorrect Turn, or Missing Road.
+* **Customizable Templates**: Easily edit the text to match your local community's tone and guidelines.
+* **Smart Reminders**: Send follow-up "nudges" to users who haven't responded to your initial inquiry.
+* **Auto-Closing**: Ready-made templates for closing resolved issues or marking reports as "Not Identified."
 
 ## Installation
 
-1. Install a userscript manager like [Tampermonkey](https://www.tampermonkey.net/) or [Violentmonkey](https://violentmonkey.github.io/)
-2. Install the script from the `user.js` file
-3. Navigate to Waze Map Editor
-4. Look for the "WME EZ Comments" tab in the sidebar
+1. Install a Userscript Manager: You'll need [Tampermonkey](https://www.tampermonkey.net/) or [Violentmonkey](https://violentmonkey.github.io/) (available for Chrome, Firefox, Edge, and Safari).
+2. Install the Script:
+   * Install [WME EZ Comments](user.js) (Note: Ensure the path to the .js file is correct)
+3. Refresh WME: Open the Waze Map Editor and you should see the WME EZ Comments panel/options when viewing an Update Request.
 
-## Placeholders
+## How it Works
+When you open an Update Request (UR) in WME, EZComments adds a series of buttons or a dropdown menu to the UR panel. Simply select the comment that fits the situation, and the script will automatically populate the comment box for you.
 
-Add these to your templates and they'll auto-fill:
-
-| Placeholder | What it does | Example |
-|------------|-------------|---------|
-| `{TYPE}` | Issue type | "Wrong driving direction" |
-| `{FULLDATE}` | Full date | "January 15, 2026" |
-| `{MONTH}` | Month name | "January" |
-| `{SHORTMONTH}` | Short month | "Jan" |
-| `{DAY}` | Day | "15" |
-| `{YEAR}` | Year | "2026" |
-| `{USERNAME}` | Your username (custom or Waze name) | "YourName" |
-| `{DATE}` | Raw date | "Mon Jan 15 2026" |
-
-## How to Use
-
-### Setup
-
-1. Open the **WME EZ Comments** tab in the sidebar
-2. (Optional) Set a custom username
-3. Edit your templates:
-   - **Initial** - First response
-   - **Follow Up** - Second reminder
-   - **Final Follow Up** - Last warning
-   - **Close** - Closing message
-4. Click **Save**
-
-### Using the Buttons
-
-1. Open any map update request
-2. Click a template button (Initial, Follow Up, Final, or No Reply)
-3. Review the auto-filled comment
-4. Send!
-
-## Example
-
-**Template:**
-```
-Hi! Responding to your "{TYPE}" issue from {FULLDATE}.
-
-Can you provide more details?
-
-~ {USERNAME}
-```
-
-**Result:**
-```
-Hi! Responding to your "Wrong turn" issue from January 15, 2026.
-
-Can you provide more details?
-
-~ YourName
-```
-
-## Changelog
-
-### v2.1.1 (2026-02-06)
-- Added custom username field in settings
-- Fixed username detection using `sdk.State.getUserInfo()`
-- Username now uses custom name if set, falls back to Waze username
-- Custom username saved to localStorage
-
-### v2.1.0 (2026)
-- Migrated to official WME SDK
-- Removed WazeWrap dependency
-- Uses modern `sdk.Sidebar.registerScriptTab()` API
-- Implements `wme-update-request-panel-opened` event
-- Better error handling
-
-### v2.0.0
-- Complete rewrite with customizable templates
-- localStorage support for persistence
-- Dynamic placeholder system
-- WME sidebar tab interface
-- Reset to defaults button
-
-### v1.0.0
-- Initial release
+## Disclaimer
+This is an unofficial community-developed script and is not endorsed by Waze or Google. Use it responsibly and always follow your local community's editing guidelines.
 
 ## Author
 
-[michaelrosstarr](https://github.com/michaelrosstarr)
+[<img alt="Author" src="https://img.shields.io/badge/Author-michaelrosstarr-red">](https://github.com/michaelrosstarr)
 
 ## License
 
